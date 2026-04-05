@@ -28,7 +28,7 @@ function AppContent() {
 
   return (
     <Routes>
-      {/* Everybody */}
+
       <Route path="/" element={<Main />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
@@ -38,7 +38,7 @@ function AppContent() {
       <Route path="/masters/:id" element={<MasterPublicProfile />} />
       <Route path="/search/advanced" element={<AdvancedSearch />} />
 
-      {/* ===== MASTER PANEL ===== */}
+
       <Route
         path="/master/*"
         element={
@@ -54,7 +54,7 @@ function AppContent() {
         <Route index element={<Navigate to="dashboard" replace />} />
       </Route>
 
-      {/* ===== ADMIN PANEL ===== */}
+
       <Route
         path="/admin"
         element={
@@ -64,7 +64,6 @@ function AppContent() {
         }
       />
 
-      {/* ===== FALLBACK ===== */}
       <Route path="*" element={<div>Sayfa Bulunamadı</div>} />
     </Routes>
   );

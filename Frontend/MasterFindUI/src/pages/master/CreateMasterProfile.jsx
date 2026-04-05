@@ -5,11 +5,11 @@ import { masterService } from '../../services/masterService';
 import { lookupsService } from '../../services/lookupsService';
 
 const CreateMasterProfile = () => {
-  // Lookup data
+
   const [serviceCategories, setServiceCategories] = useState([]);
   const [locations, setLocations] = useState([]);
 
-  // UI state
+
   const [error, setError] = useState('');
   const [loadingLookups, setLoadingLookups] = useState(true);
   const navigate = useNavigate();
@@ -147,7 +147,7 @@ const CreateMasterProfile = () => {
         <div className="container">
           {/* HERO */}
           <section className="hero aura" aria-label="Başlık">
-            <div className="heroTop"/>
+            <div className="heroTop" />
             <div className="heroBody">
               <div>
                 <h1 className="title">Usta Profilinizi Oluşturun</h1>
@@ -157,52 +157,52 @@ const CreateMasterProfile = () => {
                   <span className="badge">Profil ön izleme</span>
                   <span className="badge">Hızlı onay</span>
                 </div>
-                {/* Visual-only stepper */}
+
                 <div className="stepper" aria-hidden>
                   <span className="dot">Genel Bilgiler</span>
                   <span className="dot">Hizmetler</span>
                   <span className="dot muted">Bölgeler</span>
                 </div>
               </div>
-              <div style={{display:'grid', gap:10, alignContent:'start'}}>
-                <button type="button" className="cta" onClick={()=>window.scrollTo({top:document.body.scrollHeight, behavior:'smooth'})}>
+              <div style={{ display: 'grid', gap: 10, alignContent: 'start' }}>
+                <button type="button" className="cta" onClick={() => window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })}>
                   Formu Doldurmaya Başla
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden>
-                    <path d="M12 5v14M5 12h14" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                    <path d="M12 5v14M5 12h14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
                   </svg>
                 </button>
               </div>
             </div>
           </section>
 
-          {/* CONTENT */}
+
           <div className="grid">
-            {/* Error banner */}
+
             {error && (
               <div className="panel error" role="alert">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
-                  <path d="M12 9v4M12 17h.01M12 3a9 9 0 100 18 9 9 0 000-18z" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                  <path d="M12 9v4M12 17h.01M12 3a9 9 0 100 18 9 9 0 000-18z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
                 </svg>
                 <span>{error}</span>
               </div>
             )}
 
-            {/* Loading state with skeletons */}
+
             {loadingLookups ? (
               <div className="panel aura" aria-busy="true" aria-live="polite">
                 <h3>
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
-                    <path d="M12 2v4M12 18v4M2 12h4M18 12h4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                    <path d="M12 2v4M12 18v4M2 12h4M18 12h4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
                   </svg>
                   Form Yükleniyor…
                 </h3>
-                <div className="divider"/>
-                <div style={{display:'grid', gap:12}}>
-                  <div className="skel big"/>
-                  <div className="skel" style={{width:'72%'}}/>
-                  <div className="skel" style={{width:'56%'}}/>
-                  <div className="skel box"/>
-                  <div className="skel big"/>
+                <div className="divider" />
+                <div style={{ display: 'grid', gap: 12 }}>
+                  <div className="skel big" />
+                  <div className="skel" style={{ width: '72%' }} />
+                  <div className="skel" style={{ width: '56%' }} />
+                  <div className="skel box" />
+                  <div className="skel big" />
                 </div>
               </div>
             ) : (
@@ -212,11 +212,11 @@ const CreateMasterProfile = () => {
                 </div>
                 <h3>
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
-                    <path d="M4 7h16M4 12h16M4 17h10" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                    <path d="M4 7h16M4 12h16M4 17h10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
                   </svg>
                   Profil Formu
                 </h3>
-                <div className="divider"/>
+                <div className="divider" />
                 {/* Existing business form */}
                 <MasterProfileForm
                   onSubmit={handleCreateProfile}

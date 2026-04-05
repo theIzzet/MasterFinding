@@ -13,12 +13,12 @@ const ProtectedRoute = ({ children, requiredRoles = [] }) => {
   }
 
 
-  // user.roles => ["Admin"]
+
   const userRoles = Array.isArray(user.roles)
     ? user.roles
     : user.role
-    ? [user.role]
-    : [];
+      ? [user.role]
+      : [];
 
   if (
     requiredRoles.length > 0 &&

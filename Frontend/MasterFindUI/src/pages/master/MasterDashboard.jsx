@@ -2,12 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { masterService } from "../../services/masterService";
 
-// ---- ENV & URL HELPERS ----
 const DEV_API_BASE_URL = "https://localhost:7054";
 const API_BASE_URL =
   import.meta.env.VITE_API_BASE_URL || (import.meta.env.DEV ? DEV_API_BASE_URL : "");
 
-// ---- COMPONENT ----
+
 const MasterDashboard = () => {
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -227,14 +226,14 @@ const MasterDashboard = () => {
           {!loading && !error && !profile && (
             <div className="centerWrap">
               <div className="stateCard">
-                <h2 style={{margin:"0 0 8px"}}>Usta Paneline Hoş Geldiniz!</h2>
-                <p className="muted" style={{margin:"0 0 16px"}}>
+                <h2 style={{ margin: "0 0 8px" }}>Usta Paneline Hoş Geldiniz!</h2>
+                <p className="muted" style={{ margin: "0 0 16px" }}>
                   Müşterilerinize ulaşmak için ilk adımı atın. Henüz bir usta profiliniz bulunmuyor.
                 </p>
                 <Link to="/master/profile/create" className="cta">
                   Profil Oluştur
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden>
-                    <path d="M7 17L17 7M10 7h7v7" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                    <path d="M7 17L17 7M10 7h7v7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
                   </svg>
                 </Link>
               </div>
@@ -249,7 +248,7 @@ const MasterDashboard = () => {
                 <div className="heroTop" />
                 <div className="heroBody">
                   <img className="avatar" src={fullProfileImageUrl} alt={`${profile.name} ${profile.surName}`}
-                       onError={(e)=> e.currentTarget.src="https://placehold.co/160x160/png?text=Usta"} />
+                    onError={(e) => e.currentTarget.src = "https://placehold.co/160x160/png?text=Usta"} />
 
                   <div>
                     <h1 className="title">
@@ -267,20 +266,20 @@ const MasterDashboard = () => {
                     {/* küçük istatistik pills */}
                     <div className="heroStats">
                       <span className="pill">
-                        {/* wrench */}<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M22 19l-9-9" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/><circle cx="7" cy="7" r="3" stroke="currentColor" strokeWidth="2"/></svg>
+                        {/* wrench */}<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M22 19l-9-9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" /><circle cx="7" cy="7" r="3" stroke="currentColor" strokeWidth="2" /></svg>
                         {profile?.services?.length || 0} hizmet
                       </span>
                       <span className="pill">
-                        {/* pin */}<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 22s7-7 7-12a7 7 0 10-14 0c0 5 7 12 7 12z" stroke="currentColor" strokeWidth="2"/><circle cx="12" cy="10" r="3" stroke="currentColor" strokeWidth="2"/></svg>
+                        {/* pin */}<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 22s7-7 7-12a7 7 0 10-14 0c0 5 7 12 7 12z" stroke="currentColor" strokeWidth="2" /><circle cx="12" cy="10" r="3" stroke="currentColor" strokeWidth="2" /></svg>
                         {profile?.locations?.length || 0} bölge
                       </span>
                     </div>
                   </div>
 
                   <div>
-                    <button onClick={()=> navigate("/master/profile/edit")} className="editBtn">
+                    <button onClick={() => navigate("/master/profile/edit")} className="editBtn">
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-                        <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25z"/>
+                        <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25z" />
                       </svg>
                       Profili Düzenle
                     </button>
@@ -299,10 +298,10 @@ const MasterDashboard = () => {
                   <h3>Uzmanlık Alanları (Hizmetler)</h3>
                   <div className="tags">
                     {profile?.services?.length ? (
-                      profile.services.map((s)=>(
+                      profile.services.map((s) => (
                         <span key={s.id} className="tag indigo">{s.name}</span>
                       ))
-                    ):(
+                    ) : (
                       <span className="muted">Henüz hizmet bilgisi eklenmemiş.</span>
                     )}
                   </div>
@@ -312,10 +311,10 @@ const MasterDashboard = () => {
                   <h3>Hizmet Verilen Bölgeler</h3>
                   <div className="tags">
                     {profile?.locations?.length ? (
-                      profile.locations.map((l)=>(
+                      profile.locations.map((l) => (
                         <span key={l.id} className="tag cyan">{l.ilce}, {l.il}</span>
                       ))
-                    ):(
+                    ) : (
                       <span className="muted">Bölge bilgisi bulunmuyor.</span>
                     )}
                   </div>
@@ -327,7 +326,7 @@ const MasterDashboard = () => {
                     <a className="linkBtn" href={fullCertificateUrl} target="_blank" rel="noopener noreferrer">
                       Ustalık Belgesini Görüntüle
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" className="ml">
-                        <path d="M7 17L17 7M10 7h7v7" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                        <path d="M7 17L17 7M10 7h7v7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
                       </svg>
                     </a>
                   </section>
