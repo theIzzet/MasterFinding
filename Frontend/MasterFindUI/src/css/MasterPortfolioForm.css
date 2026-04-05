@@ -1,0 +1,341 @@
+/* ================== MasterPortfolioForm.css — refined aesthetic ================== */
+/* Bu dosya yalnızca PortfolioForm bileşenini hedefler (.portfolio-form-container scope) */
+
+/* ========== Theme (scoped) ========== */
+.portfolio-form-container{
+  --pf-text-1: 22,24,29;
+  --pf-text-2: 92,96,110;
+  --pf-primary: 74,118,168;         /* #4a76a8 */
+  --pf-primary-strong: 58,95,138;   /* #3a5f8a */
+  --pf-accent: 123,74,168;
+  --pf-success: 46,204,113;
+  --pf-danger: 231,76,60;
+  --pf-border: 224,226,231;
+  --pf-shadow: 17,24,39;
+  --pf-glass: 255,255,255;
+
+  /* arka plan */
+  position: relative;
+  padding: 1.25rem;
+  background:
+    radial-gradient(900px 600px at 8% 4%, rgba(var(--pf-primary), .06), transparent 55%),
+    radial-gradient(900px 600px at 92% 6%, rgba(var(--pf-accent), .05), transparent 55%),
+    linear-gradient(180deg, #f9fbff 0%, #eef3f9 100%);
+}
+
+/* yumuşak blur katmanı (çok hafif) */
+.portfolio-form-container::before{
+  content:"";
+  position:absolute;
+  inset:-40px;
+  z-index:0;
+  pointer-events:none;
+  background:
+    radial-gradient(800px 520px at 15% 10%, rgba(var(--pf-primary), .16), transparent 60%),
+    radial-gradient(700px 480px at 85% 12%, rgba(var(--pf-accent),  .14), transparent 60%);
+  filter: blur(22px) saturate(1.04);
+  opacity:.55;
+}
+
+/* ========== Card ========== */
+.portfolio-form{
+  position: relative;
+  z-index:1;
+  width:100%;
+  max-width:760px; /* biraz daha ferah */
+  margin:0 auto;
+  background: rgba(var(--pf-glass), .94);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border:1px solid rgba(var(--pf-border), .9);
+  border-radius:16px;
+  padding: 1.25rem 1.25rem 1rem;
+  box-shadow:
+    0 18px 40px rgba(var(--pf-shadow), .10),
+    0 2px 6px rgba(var(--pf-shadow), .05) inset;
+  transition: transform .18s cubic-bezier(.2,.7,.2,1), box-shadow .18s ease, border-color .18s ease;
+}
+.portfolio-form:hover{
+  transform: translateY(-2px);
+  border-color: rgba(var(--pf-primary), .45);
+  box-shadow:
+    0 26px 60px rgba(var(--pf-shadow), .14),
+    0 2px 6px rgba(var(--pf-shadow), .07) inset;
+}
+
+/* Başlık + ince animasyon çizgisi */
+.portfolio-form h3{
+  margin:0 0 .9rem 0;
+  font-size:1.28rem;
+  font-weight:800;
+  line-height:1.2;
+  color: rgb(var(--pf-text-1));
+  text-align:center;
+  position:relative;
+  padding-bottom:.6rem;
+  letter-spacing:.2px;
+}
+.portfolio-form h3::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  bottom:0;
+  width:160px;
+  height:2px;
+  transform: translateX(-50%);
+  border-radius:2px;
+  background: linear-gradient(90deg, rgba(var(--pf-primary), .0) 0%, rgba(var(--pf-primary), .7) 50%, rgba(var(--pf-primary), .0) 100%);
+  animation: underlinePulse 3s ease-in-out infinite;
+}
+@keyframes underlinePulse{
+  0%,100%{ opacity:.6; }
+  50%{ opacity:1; }
+}
+
+/* Hata mesajı (daha belirgin, kompakt) */
+.form-error{
+  margin:.65rem 0 1rem;
+  padding:.6rem .8rem;
+  border:1px solid rgba(var(--pf-danger), .32);
+  background: rgba(var(--pf-danger), .08);
+  color: rgb(var(--pf-danger));
+  font-size:.95rem;
+  border-radius:12px;
+  box-shadow: 0 6px 14px rgba(231,76,60,.06);
+}
+
+/* ========== Form Fields ========== */
+.portfolio-form .form-group{
+  margin-bottom:.9rem;
+}
+
+/* etiket */
+.portfolio-form .form-group label{
+  display:inline-flex;
+  align-items:center;
+  gap:.45rem;
+  margin-bottom:.45rem;
+  font-size:.95rem;
+  font-weight:700;
+  color: rgb(var(--pf-text-1));
+}
+
+/* input/select/textarea base */
+.portfolio-form select,
+.portfolio-form textarea,
+.portfolio-form input[type="text"],
+.portfolio-form input[type="email"],
+.portfolio-form input[type="tel"],
+.portfolio-form input[type="password"],
+.portfolio-form input[type="file"]{
+  width:100%;
+  border:1px solid rgba(var(--pf-border),1);
+  border-radius:12px;
+  outline:none;
+  font-size:.98rem;
+  color: rgb(var(--pf-text-1));
+  background:#fff;
+  transition: border-color .16s ease, box-shadow .16s ease, background .16s ease, transform .05s ease;
+}
+
+/* yükseklik/padding */
+.portfolio-form select,
+.portfolio-form input[type="text"],
+.portfolio-form input[type="email"],
+.portfolio-form input[type="tel"],
+.portfolio-form input[type="password"]{
+  height:46px;
+  padding:0 14px;
+}
+
+.portfolio-form textarea{
+  min-height:120px;
+  padding:12px 14px;
+  resize:vertical;
+  line-height:1.45;
+}
+
+/* hover/focus */
+.portfolio-form select:hover,
+.portfolio-form textarea:hover,
+.portfolio-form input[type="text"]:hover,
+.portfolio-form input[type="email"]:hover,
+.portfolio-form input[type="tel"]:hover,
+.portfolio-form input[type="password"]:hover,
+.portfolio-form input[type="file"]:hover{
+  border-color: rgba(var(--pf-primary), .36);
+  background:#fcfdff;
+}
+.portfolio-form select:focus,
+.portfolio-form textarea:focus,
+.portfolio-form input[type="text"]:focus,
+.portfolio-form input[type="email"]:focus,
+.portfolio-form input[type="tel"]:focus,
+.portfolio-form input[type="password"]:focus,
+.portfolio-form input[type="file"]:focus{
+  border-color: rgba(var(--pf-primary), .85);
+  box-shadow: 0 0 0 4px rgba(var(--pf-primary), .14);
+  background:#fff;
+}
+
+/* placeholder */
+.portfolio-form ::placeholder{
+  color: rgba(var(--pf-text-2), .85);
+}
+
+/* Select oku — minimalist */
+.portfolio-form select{
+  appearance:none;
+  background-image:
+    linear-gradient(45deg, transparent 50%, rgba(var(--pf-text-2), .85) 50%),
+    linear-gradient(135deg, rgba(var(--pf-text-2), .85) 50%, transparent 50%),
+    linear-gradient(to right, #fff, #fff);
+  background-position:
+    calc(100% - 20px) 19px,
+    calc(100% - 14px) 19px,
+    0 0;
+  background-size:
+    6px 6px,
+    6px 6px,
+    100% 100%;
+  background-repeat:no-repeat;
+}
+
+/* ========== File input → dropzone hissi ========== */
+.portfolio-form .form-group:has(input[type="file"]){
+  /* :has() destekleyen tarayıcılarda yumuşak bir kart görünümü */
+  padding: .75rem .75rem;
+  border: 1px dashed rgba(var(--pf-primary), .28);
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(255,255,255,.9), rgba(255,255,255,1));
+  transition: border-color .16s ease, background .16s ease, box-shadow .16s ease;
+}
+.portfolio-form .form-group:has(input[type="file"]):hover{
+  border-color: rgba(var(--pf-primary), .45);
+  box-shadow: 0 10px 22px rgba(var(--pf-shadow), .06);
+}
+.portfolio-form input[type="file"]{
+  height:46px;
+  padding: 0 10px;
+  background:#fff;
+  border-radius:12px;
+}
+
+/* modern tarayıcıların butonu */
+.portfolio-form input[type="file"]::file-selector-button{
+  margin-right:10px;
+  height:34px;
+  padding:0 14px;
+  border:1px solid rgba(var(--pf-border),1);
+  border-radius:10px;
+  background: linear-gradient(135deg, rgb(var(--pf-primary)) 0%, rgb(var(--pf-primary-strong)) 100%);
+  color:#fff;
+  font-weight:700;
+  cursor:pointer;
+  box-shadow:0 8px 16px rgba(var(--pf-primary), .22);
+  transition: transform .06s ease, box-shadow .16s ease, filter .16s ease, opacity .16s ease;
+}
+.portfolio-form input[type="file"]::file-selector-button:hover{
+  filter:saturate(1.04);
+}
+.portfolio-form input[type="file"]::file-selector-button:active{
+  transform: translateY(0.5px);
+}
+
+/* ========== Field focus vurgusu (progressive enhancement) ========== */
+.portfolio-form .form-group:has(:focus-visible),
+.portfolio-form .form-group:has(textarea:focus),
+.portfolio-form .form-group:has(select:focus){
+  outline: 2px solid rgba(var(--pf-primary), .08);
+  border-radius: 14px;
+  padding: .3rem;
+  transition: outline .16s ease, padding .16s ease;
+}
+
+/* ========== Actions ========== */
+.form-actions{
+  display:flex;
+  gap:.7rem;
+  justify-content:flex-end;
+  margin-top:1.05rem;
+}
+
+/* Primary */
+.submit-btn{
+  position:relative;
+  overflow:hidden; /* ripple için */
+  height:46px;
+  padding:0 18px;
+  border:none;
+  border-radius:12px;
+  background: linear-gradient(135deg, rgb(var(--pf-primary)) 0%, rgb(var(--pf-primary-strong)) 100%);
+  color:#fff;
+  font-weight:800;
+  letter-spacing:.2px;
+  cursor:pointer;
+  box-shadow:0 12px 24px rgba(var(--pf-primary), .22);
+  transition: transform .06s ease, box-shadow .16s ease, opacity .16s ease, filter .16s ease;
+}
+.submit-btn:hover{
+  box-shadow:0 14px 28px rgba(var(--pf-primary), .26);
+  transform: translateY(-1px);
+  filter: saturate(1.04);
+}
+.submit-btn:active{ transform: translateY(0); }
+.submit-btn:disabled{ opacity:.75; cursor:not-allowed; transform:none; }
+
+/* hafif ripple efekti */
+.submit-btn::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: radial-gradient(120px 120px at var(--x,50%) var(--y,50%), rgba(255,255,255,.25), transparent 60%);
+  opacity:0;
+  transition: opacity .25s ease;
+}
+.submit-btn:hover::after{ opacity:.35; }
+
+/* Ghost */
+.cancel-btn{
+  height:46px;
+  padding:0 16px;
+  border-radius:12px;
+  border:1px solid rgba(var(--pf-border),1);
+  background:#fff;
+  color: rgb(var(--pf-text-1));
+  font-weight:800;
+  cursor:pointer;
+  transition: background .16s ease, border-color .16s ease, transform .06s ease, box-shadow .16s ease;
+}
+.cancel-btn:hover{
+  background:#fcfdff;
+  border-color: rgba(var(--pf-primary), .4);
+  box-shadow: 0 8px 16px rgba(var(--pf-shadow), .06);
+}
+.cancel-btn:active{ transform: translateY(.5px); }
+.cancel-btn:disabled{ opacity:.6; cursor:not-allowed; }
+
+/* ========== Helpers (opsiyonel) ========== */
+.pf-input--error   { border-color: rgba(var(--pf-danger), .7) !important; }
+.pf-input--success { border-color: rgba(var(--pf-success), .7) !important; }
+
+/* ========== Responsive ========== */
+@media (max-width: 820px){
+  .portfolio-form{ max-width: 92%; }
+}
+@media (max-width: 640px){
+  .form-actions{ justify-content: stretch; }
+  .form-actions .submit-btn,
+  .form-actions .cancel-btn{ flex:1; }
+}
+
+/* Hareket kısıtlaması tercihine saygı */
+@media (prefers-reduced-motion: reduce){
+  .portfolio-form,
+  .submit-btn,
+  .cancel-btn,
+  .portfolio-form h3::after{
+    transition: none;
+    animation: none;
+  }
+}

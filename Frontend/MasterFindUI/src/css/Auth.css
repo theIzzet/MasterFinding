@@ -1,0 +1,249 @@
+/* ================== Auth.css — compact & aesthetic, overflow-safe, blurred bg ================== */
+
+/* 1) Global box-sizing: taşmayı kesin olarak önler */
+*,
+*::before,
+*::after {
+  box-sizing: border-box; /* Tüm elemanlarda border-box */
+}
+
+/* 2) Theme tokens */
+:root{
+  --text-1: 22,24,29;
+  --text-2: 92,96,110;
+  --primary: 74,118,168;         /* #4a76a8 */
+  --primary-strong: 58,95,138;   /* #3a5f8a */
+  --accent: 123,74,168;          /* morumsu vurgu */
+  --danger: 231,76,60;
+  --border: 224,226,231;
+  --shadow: 17,24,39;
+  --glass: 255,255,255;
+}
+
+/* 3) Page background: gradient + BLUR katmanı */
+.auth-page{
+  position:relative;
+  min-height:100vh;
+  width:100vw;
+  overflow-x:hidden;
+  background:
+    radial-gradient(900px 600px at 10% 5%, rgba(var(--primary), .10), transparent 55%),
+    radial-gradient(900px 600px at 90% 5%, rgba(var(--accent), .08), transparent 55%),
+    linear-gradient(180deg,#f8fbff 0%,#eef3f9 100%);
+}
+
+/* — BLUR LAYER — */
+.auth-page::before{
+  content:"";
+  position:fixed;              /* sayfa kayarken sabit kalsın */
+  inset:-60px;                 /* kenarlarda blur kırpılmasın */
+  z-index:0;
+  pointer-events:none;
+  background:
+    radial-gradient(800px 520px at 15% 10%, rgba(var(--primary), .20), transparent 60%),
+    radial-gradient(700px 480px at 85% 12%, rgba(var(--accent),  .18), transparent 60%),
+    radial-gradient(900px 600px at 50% 100%, rgba(74,168,124,.14), transparent 65%);
+  filter: blur(26px) saturate(1.08);
+  opacity:.65;
+}
+/* hafif vinyet */
+.auth-page::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  background: radial-gradient(1200px 800px at 50% 120%, rgba(0,0,0,.06), transparent 60%);
+  opacity:.5;
+}
+
+/* 4) Layout container */
+.auth-container{
+  min-height:100vh;
+  display:grid;
+  place-items:center;
+  padding:1.25rem;
+  position:relative;
+  z-index:1; /* blur katmanının üstünde */
+}
+
+/* 5) Card (glassmorphism + soft shadow) */
+.auth-card{
+  width:100%;
+  max-width:380px;
+  background: rgba(var(--glass), .95);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border:1px solid rgba(var(--border), .9);
+  box-shadow: 0 10px 28px rgba(var(--shadow), .10);
+  border-radius:14px;
+  padding:1.25rem 1.25rem 1rem;
+  overflow: hidden; /* kart dışına taşma yok */
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+.auth-card:hover{
+  transform: translateY(-2px);
+  border-color: rgba(var(--primary), .5);
+  box-shadow: 0 24px 56px rgba(var(--shadow), .16), 0 2px 6px rgba(var(--shadow), .08) inset;
+}
+.auth-card.compact{max-width:360px;padding:1rem 1rem .875rem;border-radius:12px}
+
+/* 6) Header */
+.auth-header{ text-align:center;margin-bottom:.5rem;position:relative;padding-bottom:.5rem;}
+.auth-header::after{
+  content:"";
+  position:absolute;left:-1.25rem;right:-1.25rem;bottom:0;height:1px;
+  background: linear-gradient(90deg, rgba(var(--border),0) 0%, rgba(var(--border),1) 25%, rgba(var(--border),1) 75%, rgba(var(--border),0) 100%);
+}
+.auth-header.compact{ margin-bottom:.25rem;}
+.auth-logo{ width:40px;height:40px;margin:0 auto .35rem;border-radius:10px;
+  display:grid;place-items:center;font-weight:800;color:#fff;letter-spacing:.3px;
+  background: linear-gradient(135deg, rgb(var(--primary)) 0%, rgb(var(--accent)) 100%);
+  box-shadow:0 6px 14px rgba(var(--primary),.28);
+}
+.auth-logo.small{ width:36px;height:36px;border-radius:9px}
+.auth-title{ margin:.2rem 0; font-size:1.22rem; line-height:1.15; color:rgb(var(--text-1)); font-weight:800;}
+.auth-title.compact{ font-size:1.18rem; }
+
+/* 7) Alert */
+.auth-alert{
+  width:100%;
+  border:1px solid rgba(var(--danger),.25);
+  background:rgba(var(--danger),.06);
+  color:rgb(var(--danger));
+  border-radius:10px;
+  padding:.55rem .6rem;
+  font-size:.9rem;
+  margin:.6rem 0 .85rem;
+}
+.auth-alert.compact{ border-radius:8px; }
+
+/* 8) Form */
+.form-group{ margin-bottom:.65rem;}
+.form-group.compact{ margin-bottom:.55rem; }
+.form-group label{
+  display:flex;align-items:center;gap:.4rem;margin-bottom:.35rem;
+  font-size:.9rem;color:rgb(var(--text-1));font-weight:600;
+}
+.req{ color:rgb(var(--danger)); }
+
+/* kritik: input’lar da border-box olsun */
+.form-group input{
+  box-sizing: border-box;
+  width:100%;height:44px;padding:0 12px;border-radius:10px;
+  border:1px solid rgba(var(--border),1);
+  background:#fff;color:rgb(var(--text-1));font-size:.98rem;outline:none;
+  transition:border-color .16s ease, box-shadow .16s ease, background .16s ease, transform .05s ease;
+}
+.form-group input::placeholder{ color:rgba(var(--text-2),.85); }
+.form-group input:hover{ border-color: rgba(var(--primary), .35); background:#fcfdff; }
+.form-group input:focus{ border-color:rgba(var(--primary),.8); box-shadow:0 0 0 3px rgba(var(--primary),.12); background:#fff;}
+.form-group input:disabled{ opacity:.7; cursor:not-allowed; }
+
+.help{ display:block;margin-top:.35rem;color:rgb(var(--text-2));font-size:.82rem;}
+
+/* 9) Password (FLEX—taşma yok) */
+.password-row{
+  display:flex;align-items:center;width:100%;
+  background:#eef3ff;
+  border:1px solid rgba(var(--border),1);
+  border-radius:10px;height:44px;overflow:hidden;
+  transition: border-color .16s ease, background .16s ease, box-shadow .16s ease;
+}
+.password-row:focus-within{
+  border-color: rgba(var(--primary), .8);
+  box-shadow: 0 0 0 3px rgba(var(--primary), .12);
+  background: #f4f7ff;
+}
+.password-row input{
+  border:none;background:transparent;height:100%;padding:0 12px;flex:1; /* alanı doldurur */
+}
+.password-row input:focus{ box-shadow:none; outline:none; }
+.toggle-password-btn{
+  flex:0 0 40px;height:44px;border:none;background:transparent;
+  display:grid;place-items:center;cursor:pointer;transition:background .15s ease, transform .06s ease, opacity .15s ease;
+}
+.toggle-password-btn:hover{ background:rgba(0,0,0,.05); }
+.toggle-password-btn:active{ transform:scale(.98); }
+.toggle-password-btn svg{ opacity:.85; }
+
+/* 10) Row / Switch */
+.form-row.between{ display:flex;align-items:center;justify-content:space-between;gap:.5rem;margin:.25rem 0 .85rem;}
+.switch{ position:relative;display:inline-flex;align-items:center;gap:.5rem;cursor:pointer;user-select:none;}
+.switch.compact .switch-label{ font-size:.9rem;color:rgb(var(--text-1));}
+.switch input{ position:absolute;opacity:0;pointer-events:none;}
+.slider{
+  --h:20px;width:36px;height:var(--h);border-radius:10px;background:#eef2f7;border:1px solid rgba(var(--border),1);
+  position:relative;transition:background .18s ease,border-color .18s ease, box-shadow .18s ease;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.35);
+}
+.slider.compact{ --h:20px;width:36px; }
+.slider::after{
+  content:"";position:absolute;top:50%;left:2px;width:16px;height:16px;transform:translateY(-50%);
+  background:#fff;border-radius:50%;box-shadow:0 1px 2px rgba(0,0,0,.18);transition:left .18s ease;
+}
+.switch input:checked + .slider{ background:rgba(var(--primary),.22);border-color:rgba(var(--primary),.6);box-shadow: inset 0 0 0 1px rgba(255,255,255,.4); }
+.switch input:checked + .slider::after{ left:18px; }
+.switch-label{ font-size:.9rem; color: rgb(var(--text-1)); }
+
+/* 11) Links / Button */
+.link-muted{ color:rgb(var(--text-2));text-decoration:none;transition:color .15s ease;}
+.link-muted:hover{ color:rgb(var(--text-1));}
+.link-strong{ color:rgb(var(--primary));text-decoration:none;font-weight:700;}
+.link-strong:hover{ text-decoration:underline; }
+
+.auth-button{
+  width:100%;height:44px;border:none;border-radius:10px;
+  background: linear-gradient(135deg, rgb(var(--primary)) 0%, rgb(var(--primary-strong)) 100%);
+  color:#fff;font-weight:700;letter-spacing:.2px;font-size:.98rem;
+  display:grid;place-items:center;cursor:pointer;
+  box-shadow:0 8px 16px rgba(var(--primary),.22);
+  transition:transform .06s ease, box-shadow .16s ease, opacity .16s ease, filter .16s ease;
+}
+.auth-button:hover{ box-shadow:0 12px 22px rgba(var(--primary),.24); transform:translateY(-1px); filter:saturate(1.03);}
+.auth-button:active{ transform:translateY(0); }
+.auth-button:disabled{ opacity:.75; cursor:not-allowed; transform:none;}
+
+/* 12) Footer */
+.auth-footer{ margin-top:.8rem;text-align:center;color:rgb(var(--text-2));font-size:.9rem;}
+.auth-footer.compact{ margin-top:.6rem; }
+
+/* 13) Register özgü ekler */
+/* 2 kolonlu satırlar (Ad/Soyad, Email/Telefon, Şifre/Tekrar) */
+.form-row{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap:.65rem;
+  margin-bottom:.65rem; /* .form-group ile uyumlu */
+}
+@media (max-width:640px){
+  .form-row{ grid-template-columns: 1fr; }
+}
+
+/* Kısa bilgilendirme bloğu */
+.form-info{
+  margin:.35rem 0 .75rem;
+  color: rgb(var(--text-2));
+  font-size:.85rem;
+  line-height:1.35;
+}
+
+/* Eski "auth-link" kullanan sayfalar için Login footer stiliyle uyumlu görünüm */
+.auth-link{
+  margin-top:.8rem;
+  text-align:center;
+  color:rgb(var(--text-2));
+  font-size:.9rem;
+}
+.auth-link a{
+  color:rgb(var(--primary));
+  text-decoration:none;
+  font-weight:700;
+}
+.auth-link a:hover{ text-decoration:underline; }
+
+/* 14) Responsive */
+@media (max-width:480px){
+  .auth-card{ max-width:340px; }
+  .auth-card.compact{ max-width:328px; }
+}
